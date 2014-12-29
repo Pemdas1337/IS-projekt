@@ -1,0 +1,55 @@
+IS-projekt
+==========
+
+package allt;
+
+import javax.swing.JFrame;
+
+public class Controller {
+	Databas customers; // Refererar till modellen ("kundgregistret")
+	JFrame ReggaKund; // Refererar till det grafiska gränssnittet
+	
+	Kund asd;
+	
+	public Controller(Databas customerReg, JFrame customerFrame) {
+		this.customers = customerReg;
+		this.ReggaKund = customerFrame;
+	}
+	public Controller(){
+		customers = new Databas();
+	}
+	public void addCustomer(String Cnamn, String Cnummer, String Cfakturaadress, String Cleveransadress, String Ctfnnr, String Cemail, String Crabattniva, String Ckontaktperson, String Cbestallare) {
+		Kund tmpCustomer = new Kund(Cnamn, Cnummer, Cfakturaadress, Cleveransadress, Ctfnnr, Cemail, Crabattniva, Ckontaktperson, Cbestallare);
+		System.out.println("Kund skapad");
+		System.out.println(tmpCustomer.getEmail());
+		customers.addKunder(tmpCustomer);
+		System.out.println("Kund tillagd i databas");
+		System.out.println(customers.getKund().size());
+		asd = tmpCustomer;
+		System.out.println(tmpCustomer.getTelefonnr());
+		System.out.println(tmpCustomer.getBestallare());
+	}
+
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return asd.getKundnr();
+	}
+	
+	public String[] findCustomer(String cNumberFind) {
+		 Kund c;
+		 String[] aCust = new String[9];
+		 c = customers.findKund(cNumberFind);
+		 System.out.println("Fått kundobjekt");
+		 aCust[0] = c.getNamn();
+		 aCust[1] = c.getKundnr();
+		 aCust[2] = c.getFakturaadress();
+		 aCust[3] = c.getLeveransadress();
+		 aCust[4] = c.getTelefonnr();
+		 aCust[5] = c.getEmail();
+		 aCust[6] = c.getRabattnivå();
+		 aCust[7] = c.getKontaktperson();
+		 aCust[8] = c.getBestallare();
+		 return aCust;
+	}
+}
+

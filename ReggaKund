@@ -1,0 +1,194 @@
+IS-projekt
+==========
+
+package allt;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+public class ReggaKund extends JFrame {
+	
+	private JPanel contentPane;
+	private JTextField textField_Namn;
+	private JTextField textField_KundNr;
+	private JTextField textField_FaktureringsAdress;
+	private JTextField textField_LeveransAdress;
+	private JTextField textField_TelefonNr;
+	private JTextField textField_Email;
+	private JLabel lblEmail;
+	private JTextField textField_RabattNiva;
+	private JLabel lblRabattniv;
+	private JTextField textField_KontaktPerson;
+	private JLabel lblBestllarefretagskund;
+	private JTextField textField_Bestallare;
+	private JLabel lblKontaktpersonfretagskund;
+	private JLabel lblKundnrpersonnrorgnr;
+	private JButton btnSpara;
+	private JButton btnAvbryta;
+	private Databas customerReg = new Databas();
+	private JFrame customerFrame;
+
+	private Controller kontroll; //Koppling till klassen Controller
+	private Databas customerRegister;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//ReggaKund frame = new ReggaKund();
+					//frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ReggaKund(Controller controller) {
+		Controller kontroller = controller;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 400);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField_Namn = new JTextField();
+		textField_Namn.setBounds(180, 27, 86, 20);
+		contentPane.add(textField_Namn);
+		textField_Namn.setColumns(10);
+		
+		
+		textField_KundNr = new JTextField();
+		textField_KundNr.setBounds(180, 58, 86, 20);
+		contentPane.add(textField_KundNr);
+		textField_KundNr.setColumns(10);
+		
+		textField_FaktureringsAdress = new JTextField();
+		textField_FaktureringsAdress.setBounds(180, 89, 86, 20);
+		contentPane.add(textField_FaktureringsAdress);
+		textField_FaktureringsAdress.setColumns(10);
+		
+		JLabel lblNamn = new JLabel("Namn");
+		lblNamn.setBounds(144, 30, 36, 14);
+		contentPane.add(lblNamn);
+		
+		JLabel lblFaktureringsaddress = new JLabel("Faktureringsaddress");
+		lblFaktureringsaddress.setBounds(58, 92, 122, 14);
+		contentPane.add(lblFaktureringsaddress);
+		
+		textField_LeveransAdress = new JTextField();
+		textField_LeveransAdress.setBounds(180, 119, 86, 20);
+		contentPane.add(textField_LeveransAdress);
+		textField_LeveransAdress.setColumns(10);
+		
+		textField_TelefonNr = new JTextField();
+		textField_TelefonNr.setBounds(180, 150, 86, 20);
+		contentPane.add(textField_TelefonNr);
+		textField_TelefonNr.setColumns(10);
+		
+		textField_Email = new JTextField();
+		textField_Email.setBounds(180, 181, 86, 20);
+		contentPane.add(textField_Email);
+		textField_Email.setColumns(10);
+		
+		JLabel lblLeveransadress = new JLabel("Leveransadress");
+		lblLeveransadress.setBounds(85, 122, 95, 14);
+		contentPane.add(lblLeveransadress);
+		
+		JLabel lblTelefonnr = new JLabel("Telefonnr");
+		lblTelefonnr.setBounds(122, 153, 58, 14);
+		contentPane.add(lblTelefonnr);
+		
+		lblEmail = new JLabel("Email");
+		lblEmail.setBounds(143, 184, 37, 14);
+		contentPane.add(lblEmail);
+		
+		textField_RabattNiva = new JTextField();
+		textField_RabattNiva.setBounds(180, 212, 86, 20);
+		contentPane.add(textField_RabattNiva);
+		textField_RabattNiva.setColumns(10);
+		
+		lblRabattniv = new JLabel("Rabattniv\u00E5");
+		lblRabattniv.setBounds(115, 215, 65, 14);
+		contentPane.add(lblRabattniv);
+		
+		textField_KontaktPerson = new JTextField();
+		textField_KontaktPerson.setBounds(180, 243, 86, 20);
+		contentPane.add(textField_KontaktPerson);
+		textField_KontaktPerson.setColumns(10);
+		
+		lblBestllarefretagskund = new JLabel("Best\u00E4llare (f\u00F6retagskund)");
+		lblBestllarefretagskund.setBounds(35, 277, 145, 14);
+		contentPane.add(lblBestllarefretagskund);
+		
+		textField_Bestallare = new JTextField();
+		textField_Bestallare.setBounds(180, 274, 86, 20);
+		contentPane.add(textField_Bestallare);
+		textField_Bestallare.setColumns(10);
+		
+		lblKontaktpersonfretagskund = new JLabel("Kontaktperson (f\u00F6retagskund)");
+		lblKontaktpersonfretagskund.setBounds(6, 246, 174, 14);
+		contentPane.add(lblKontaktpersonfretagskund);
+		
+		lblKundnrpersonnrorgnr = new JLabel("Kundnr (personnr/org.nr)");
+		lblKundnrpersonnrorgnr.setBounds(35, 61, 145, 14);
+		contentPane.add(lblKundnrpersonnrorgnr);
+		
+		btnSpara = new JButton("Spara");
+		btnSpara.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String Cnamn = textField_Namn.getText();
+				String Cnummer = textField_KundNr.getText();
+				String Cfakturaadress = textField_FaktureringsAdress.getText();
+				String Cleveransadress = textField_LeveransAdress.getText();
+				String Ctfnnr = textField_TelefonNr.getText();
+				String Cemail = textField_Email.getText();
+				String Crabattniva = textField_RabattNiva.getText();
+				String Ckontaktperson = textField_KontaktPerson.getText();
+				String Cbestallare = textField_Bestallare.getText();
+				System.out.println(textField_Bestallare.getText());
+				System.out.println(textField_TelefonNr.getText());
+				//				try { 
+				kontroller.addCustomer(Cnamn, Cnummer, Cfakturaadress, Cleveransadress, Ctfnnr, Cemail, Crabattniva, Ckontaktperson, Cbestallare);
+//				} catch (NullPointerException ed){
+//					
+//				}
+//				
+				
+				
+			}
+		});
+		btnSpara.setBounds(238, 328, 89, 23);
+		contentPane.add(btnSpara);
+		
+		btnAvbryta = new JButton("Avbryta");
+		btnAvbryta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false); //you can't see me!
+				dispose();
+			}
+		});
+		btnAvbryta.setBounds(337, 328, 89, 23);
+		contentPane.add(btnAvbryta);
+	}
+}
+	
+	
+

@@ -1,0 +1,117 @@
+package allt;
+
+import java.util.ArrayList;
+
+public class Kund {
+	
+		private ArrayList<Kundvagn> kundvagn = new ArrayList<Kundvagn>();
+	
+		private String namn;
+		private String fakturaadress;
+		private String leveransadress;
+		private String telefonnr;
+		private String email;
+		private String rabattnivå;
+		private String kundnr;
+		private String kontaktperson;
+		private String bestallare;
+		private String stad;
+		private String postnr;
+				
+		public String getNamn() {
+			return this.namn;
+		}
+		public void setNamn(String namn) {
+			this.namn = namn;
+		}
+		public String getFakturaadress() {
+			return this.fakturaadress;
+		}
+		public void setFakturaadress(String fakturaadress) {
+			this.fakturaadress = fakturaadress;
+		}
+		public String getLeveransadress() {
+			return this.leveransadress;
+		}
+		public void setLeveransadress(String leveransadress) {
+			this.leveransadress = leveransadress;
+		}
+		public String getTelefonnr() {
+			return this.telefonnr;
+		}
+		public void setTelefonnr(String telefonnr) {
+			this.telefonnr = telefonnr;
+		}
+		public String getEmail() {
+			return this.email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		public String getRabattnivå() {
+			return this.rabattnivå;
+		}
+		public void setRabattnivå(String rabattnivå) {
+			this.rabattnivå = rabattnivå;
+		}
+		
+		public String getKundnr() {
+			return this.kundnr;
+		}
+		
+		public void setKundnr(String kundnr) {
+			this.kundnr = kundnr;
+		}
+		
+		public void setKontaktperson(String kontaktperson) {
+			this.kontaktperson = kontaktperson;
+		}
+		
+		public String getKontaktperson() {
+			return this.kontaktperson;
+		}
+		
+		public void setBestallare(String bestallare) {
+			this.bestallare = bestallare;
+		}
+		
+		public String getBestallare (){
+			return this.bestallare;
+		}
+		
+		public String getPostnr(){
+			return this.postnr;
+		}
+		
+		public void setPostnr (String postnr){
+			this.postnr = postnr;
+		}
+		
+		public String getStad(){
+			return this.stad;
+		}
+		
+		public void setStad(String stad){
+			this.stad = stad;
+		}
+		
+		public Kund(String Cnamn, String Cnummer, String Cfakturaadress, String Cleveransadress, String Ctfnnr, String Cemail, String Crabattniva, String Ckontaktperson, String Cbestallare, String Cpostnr, String Cstad) {
+			this.setKundnr(Cnummer);
+			this.setNamn(Cnamn);
+			this.setEmail(Cemail);
+			this.setFakturaadress(Cfakturaadress);
+			this.setLeveransadress(Cleveransadress);
+			this.setRabattnivå(Crabattniva);
+			this.setTelefonnr(Ctfnnr);
+			this.setKontaktperson(Ckontaktperson);
+			this.setBestallare(Cbestallare);
+			this.setPostnr(Cpostnr);
+			this.setStad(Cstad);
+		}
+		
+		public ArrayList<Kundvagn> getKundvagn(){
+			return kundvagn;
+		}
+		
+	}
+	

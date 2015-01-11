@@ -1,0 +1,110 @@
+package allt;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Apptest {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Apptest window = new Apptest();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Apptest() {
+		initialize();
+		frame.setTitle("Schinn & Behn");
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		Controller controller = new Controller();
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 375);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnRegistreraKund = new JButton("Registera Kund");
+		btnRegistreraKund.setBounds(132, 50, 165, 23);
+		frame.getContentPane().add(btnRegistreraKund);
+		btnRegistreraKund.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				ReggaKund rg1 = new ReggaKund(controller);
+				rg1.setVisible(true);
+			}
+		});
+	
+		
+		JButton btnHittaKund = new JButton("Hitta Kund");
+		btnHittaKund.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HittaKund hk1 = new HittaKund(controller);
+				hk1.setVisible(true);
+			}
+		});
+		btnHittaKund.setBounds(132, 93, 165, 23);
+		frame.getContentPane().add(btnHittaKund);
+		
+		JButton btnLggOrder = new JButton("L\u00E4gg Order");
+		btnLggOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LaggOrder lg1 = new LaggOrder(controller);
+				lg1.setVisible(true);
+			}
+		});
+		btnLggOrder.setBounds(132, 137, 165, 23);
+		frame.getContentPane().add(btnLggOrder);
+		
+		JButton btnHittaOrder = new JButton("Hitta Order");
+		btnHittaOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HittaOrder ho1 = new HittaOrder(controller);
+				ho1.setVisible(true);
+			}
+		});
+		btnHittaOrder.setBounds(132, 180, 165, 23);
+		frame.getContentPane().add(btnHittaOrder);
+		
+		JButton btnNewButton = new JButton("Registrera produkt");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReggaProdukt rp1 = new ReggaProdukt(controller);
+				rp1.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(132, 223, 165, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnUppdateraLagerstatus = new JButton("Uppdatera lagerstatus");
+		btnUppdateraLagerstatus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UppdateraLagerstatus ul1 = new UppdateraLagerstatus(controller);
+				ul1.setVisible(true);
+			}
+		});
+		btnUppdateraLagerstatus.setBounds(132, 267, 165, 23);
+		frame.getContentPane().add(btnUppdateraLagerstatus);
+	}
+
+}

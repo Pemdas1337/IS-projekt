@@ -1,0 +1,63 @@
+package allt;
+
+
+public class Controller {
+	Databas database;
+	
+	private int raknare = 0;
+	
+	public Controller(){
+		database = new Databas();
+	}
+	public void addCustomer(String Cnamn, String Cnummer, String Cfakturaadress, String Cleveransadress, String Ctfnnr, String Cemail, String Crabattniva, String Ckontaktperson, String Cbestallare, String Cpostnr, String Cstad) {
+		Kund tmpCustomer = new Kund(Cnamn, Cnummer, Cfakturaadress, Cleveransadress, Ctfnnr, Cemail, Crabattniva, Ckontaktperson, Cbestallare, Cpostnr, Cstad);
+		database.addKunder(tmpCustomer);
+	}
+	
+	public void removeCustomer(String cNumberRemove) {
+		database.removeKund(cNumberRemove);
+	}
+	
+	public String[] findCustomer(String cNumberFind) {
+		 Kund c;
+		 String[] aCust = new String[11];
+		 c = database.findKund(cNumberFind);
+		 System.out.println("Fått kundobjekt");
+		 aCust[0] = c.getNamn();
+		 aCust[1] = c.getKundnr();
+		 aCust[2] = c.getFakturaadress();
+		 aCust[3] = c.getLeveransadress();
+		 aCust[4] = c.getTelefonnr();
+		 aCust[5] = c.getEmail();
+		 aCust[6] = c.getRabattnivå();
+		 aCust[7] = c.getKontaktperson();
+		 aCust[8] = c.getBestallare();
+		 aCust[9] = c.getPostnr();
+		 aCust[10] = c.getStad();
+		 return aCust;
+	}
+	
+	public void addProduct(String Pnamn, String Pnummer, String Pbatchkod, String Plagerfilial, String Pspecifikation, String Plagerplats, String Pvikt, String Pkilopris, int antal){
+		Produkt tmpProduct = new Produkt(Pnamn, Pnummer, Pbatchkod, Plagerfilial, Pspecifikation, Plagerplats, Pvikt, Pkilopris, antal);
+		database.addProdukter(tmpProduct);
+	}
+	
+	public String[] findProduct(String pNumberFind){
+		Produkt p;
+		String[] aProd = new String [4];
+		p = database.findProdukt(pNumberFind);
+		aProd[0] = p.getProduktnamn();
+		aProd[1] = p.getSpecifikation();
+		aProd[2] = p.getVikt();
+		aProd[3] = p.getKilopris();
+		return aProd;
+	}
+		
+	public int getOrderNumber(){
+		return raknare;
+	}
+	
+	public void setOrderNumber(int nr){
+		raknare = nr;
+	}
+}

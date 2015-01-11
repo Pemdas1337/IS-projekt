@@ -1,0 +1,91 @@
+package allt;
+
+public class Produkt {
+		
+	private String produktnamn;
+	private String produktnr;
+	private String batchkod;
+	private String lagerfilial;
+	private String specifikation;
+	private String lagerplats;
+	private String vikt;
+	private String kilopris;
+	private int antal;
+	
+	public int getAntal() {
+		return antal;
+	}
+	public void setAntal(int antal) {
+		this.antal = antal;
+	}
+	public String getProduktnamn() {
+		return produktnamn;
+	}
+	public void setProduktnamn(String produktnamn) {
+		this.produktnamn = produktnamn;
+	}
+	public String getProduktnr() {
+		return produktnr;
+	}
+	public void setProduktnr(String produktnr) {
+		this.produktnr = produktnr;
+	}
+	public String getBatchkod() {
+		return batchkod;
+	}
+	public void setBatchkod(String batchkod) {
+		this.batchkod = batchkod;
+	}
+	public String getLagerfilial() {
+		return lagerfilial;
+	}
+	public void setLagerfilial(String lagerfilial) {
+		this.lagerfilial = lagerfilial;
+	}
+	public String getSpecifikation() {
+		return specifikation;
+	}
+	public void setSpecifikation(String specifikation) {
+		this.specifikation = specifikation;
+	}
+	public String getLagerplats() {
+		return lagerplats;
+	}
+	public void setLagerplats(String lagerplats) {
+		this.lagerplats = lagerplats;
+	}
+
+	public String getVikt() {
+		return vikt;
+	}
+	public void setVikt(String vikt) {
+		this.vikt = vikt;
+	}
+	public String getKilopris() {
+		return kilopris;
+	}
+	public void setKilopris(String kilopris) {
+		this.kilopris = kilopris;
+	}
+	
+	public Produkt(String Pnamn, String Pnummer, String Pbatchkod, String Plagerfilial, String Pspecifikation, String Plagerplats, String Pvikt, String Pkilopris, int antal){
+		this.setProduktnamn(Pnamn);
+		this.setProduktnr(Pnummer);
+		this.setBatchkod(Pbatchkod);
+		this.setLagerfilial(Plagerfilial);
+		this.setSpecifikation(Pspecifikation);
+		this.setLagerplats(Plagerplats);
+		this.setVikt(Pvikt);
+		this.setKilopris(Pkilopris);
+		this.setAntal(antal);
+	}
+	
+	public void laggTill (int summa1){
+		antal+=summa1;
+	}
+	
+	public void taBort (int summa2){
+		antal-=summa2;
+	}
+	
+}

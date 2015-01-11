@@ -1,0 +1,204 @@
+package allt;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ReggaProdukt extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_Pnamn;
+	private JTextField textField_PNr;
+	private JTextField textField_Pbatchkod;
+	private JTextField textField_Plagerfilial;
+	private JTextField textField_Pspecifikation;
+	private JTextField textField_Plagerplats;
+	private JTextField textField_Pvikt;
+	private JTextField textField_Pkilopris;
+	private JTextField textField_antal;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//ReggaProdukt frame = new ReggaProdukt();
+					//frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ReggaProdukt(Controller controller) {
+		setTitle("Registrera produkt");
+		Controller kontroller = controller;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 460);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField_Pnamn = new JTextField();
+		textField_Pnamn.setBounds(112, 42, 200, 20);
+		contentPane.add(textField_Pnamn);
+		textField_Pnamn.setColumns(10);
+		
+		textField_PNr = new JTextField();
+		textField_PNr.setColumns(10);
+		textField_PNr.setBounds(112, 78, 200, 20);
+		contentPane.add(textField_PNr);
+		
+		textField_Pbatchkod = new JTextField();
+		textField_Pbatchkod.setColumns(10);
+		textField_Pbatchkod.setBounds(112, 114, 200, 20);
+		contentPane.add(textField_Pbatchkod);
+		
+		textField_Plagerfilial = new JTextField();
+		textField_Plagerfilial.setColumns(10);
+		textField_Plagerfilial.setBounds(112, 151, 200, 20);
+		contentPane.add(textField_Plagerfilial);
+		
+		textField_Pspecifikation = new JTextField();
+		textField_Pspecifikation.setColumns(10);
+		textField_Pspecifikation.setBounds(112, 190, 200, 20);
+		contentPane.add(textField_Pspecifikation);
+		
+		textField_Plagerplats = new JTextField();
+		textField_Plagerplats.setColumns(10);
+		textField_Plagerplats.setBounds(112, 229, 200, 20);
+		contentPane.add(textField_Plagerplats);
+		
+		textField_Pvikt = new JTextField();
+		textField_Pvikt.setColumns(10);
+		textField_Pvikt.setBounds(112, 266, 200, 20);
+		contentPane.add(textField_Pvikt);
+		
+		textField_Pkilopris = new JTextField();
+		textField_Pkilopris.setColumns(10);
+		textField_Pkilopris.setBounds(112, 305, 200, 20);
+		contentPane.add(textField_Pkilopris);
+		
+		JLabel lblProduktnamn = new JLabel("Produktnamn");
+		lblProduktnamn.setBounds(10, 32, 121, 40);
+		contentPane.add(lblProduktnamn);
+		
+		JLabel lblProduktnummer = new JLabel("Produktnummer");
+		lblProduktnummer.setBounds(10, 68, 121, 40);
+		contentPane.add(lblProduktnummer);
+		
+		JLabel lblBatchkod = new JLabel("Batchkod");
+		lblBatchkod.setBounds(10, 105, 121, 40);
+		contentPane.add(lblBatchkod);
+		
+		JLabel lblLagerfilial = new JLabel("Lagerfilial");
+		lblLagerfilial.setBounds(10, 141, 121, 40);
+		contentPane.add(lblLagerfilial);
+		
+		JLabel lblSpecifikation = new JLabel("Specifikation");
+		lblSpecifikation.setBounds(10, 182, 121, 40);
+		contentPane.add(lblSpecifikation);
+		
+		JLabel lblLagerplats = new JLabel("Lagerplats");
+		lblLagerplats.setBounds(10, 221, 121, 40);
+		contentPane.add(lblLagerplats);
+		
+		JLabel lblVikt = new JLabel("Vikt");
+		lblVikt.setBounds(10, 260, 121, 40);
+		contentPane.add(lblVikt);
+		
+		JLabel lblKrkg = new JLabel("Pris (kr)");
+		lblKrkg.setBounds(10, 295, 121, 40);
+		contentPane.add(lblKrkg);
+		
+		JLabel lblsvAr = new JLabel("");
+		lblsvAr.setBounds(112, 368, 200, 20);
+		contentPane.add(lblsvAr);
+		
+		JButton btnAvbryt = new JButton("Avbryt");
+		btnAvbryt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false); //you can't see me!
+				dispose();
+			}
+		});
+		btnAvbryt.setBounds(322, 388, 102, 23);
+		contentPane.add(btnAvbryt);
+		
+		JButton btnRegistrera = new JButton("Registrera");
+		btnRegistrera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String Pnummer = textField_PNr.getText();
+				if(controller.database.findProdBoolean(Pnummer)){
+					lblsvAr.setText("Product already registered!");
+					textField_Pnamn.setText("");
+					textField_PNr.setText("");
+					textField_Pbatchkod.setText("");
+					textField_Plagerfilial.setText("");
+					textField_Pspecifikation.setText("");
+					textField_Plagerplats.setText("");
+					textField_Pvikt.setText("");
+					textField_Pkilopris.setText("");
+				} else {
+				String Pnamn = textField_Pnamn.getText();
+				String Pbatchkod = textField_Pbatchkod.getText();
+				String Plagerfilial = textField_Plagerfilial.getText();
+				String Pspecifikation = textField_Pspecifikation.getText();
+				String Plagerplats = textField_Plagerplats.getText();
+				String Pvikt = textField_Pvikt.getText();
+				String Pkilopris = textField_Pkilopris.getText();
+				String ettantal = textField_antal.getText();
+				int antal = Integer.parseInt(ettantal);
+				kontroller.addProduct(Pnamn, Pnummer, Pbatchkod, Plagerfilial, Pspecifikation, Plagerplats, Pvikt, Pkilopris, antal);
+				lblsvAr.setText("Produkt registrerad!");
+				}
+			}
+		});
+		btnRegistrera.setBounds(210, 388, 102, 23);
+		contentPane.add(btnRegistrera);
+		
+		JButton btnRensaFlt = new JButton("Rensa f\u00E4lt");
+		btnRensaFlt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField_Pnamn.setText("");
+				textField_PNr.setText("");
+				textField_Pbatchkod.setText("");
+				textField_Plagerfilial.setText("");
+				textField_Pspecifikation.setText("");
+				textField_Plagerplats.setText("");
+				textField_Pvikt.setText("");
+				textField_Pkilopris.setText("");
+				lblsvAr.setText("");
+			}
+		});
+		btnRensaFlt.setBounds(90, 388, 110, 23);
+		contentPane.add(btnRensaFlt);
+		
+		textField_antal = new JTextField();
+		textField_antal.setColumns(10);
+		textField_antal.setBounds(112, 342, 200, 20);
+		contentPane.add(textField_antal);
+		
+		JLabel lblAntal = new JLabel("Antal");
+		lblAntal.setBounds(10, 331, 121, 40);
+		contentPane.add(lblAntal);
+		
+		
+	}
+
+}

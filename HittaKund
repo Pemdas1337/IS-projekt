@@ -1,0 +1,228 @@
+package allt;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+
+public class HittaKund extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_sok;
+	private JLabel lblVnligenSkrivIn;
+	private JTextField textField_name;
+	private JTextField textField_kundnr;
+	private JTextField textField_fakturaadress;
+	private JTextField textField_leveransadress;
+	private JTextField textField_tfnnr;
+	private JTextField textField_email;
+	private JTextField textField_rabattniva;
+	private JTextField textField_kontaktperson;
+	private JTextField textField_bestallare;
+	private JLabel lblsvar;
+	private JButton btnRadera;
+	private JTextField textField_postnr;
+	private JTextField textField_stad;
+	
+	
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//HittaKund frame = new HittaKund();
+					//frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public HittaKund(Controller controller) {
+		setTitle("Hitta kund");
+		Controller kontroller = controller;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 560);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField_sok = new JTextField();
+		textField_sok.setBounds(156, 61, 142, 20);
+		contentPane.add(textField_sok);
+		textField_sok.setColumns(10);
+		textField_sok.setHorizontalAlignment(JTextField.CENTER);
+		
+		lblVnligenSkrivIn = new JLabel("V\u00E4nligen skriv in kundnr");
+		lblVnligenSkrivIn.setBounds(157, 26, 142, 39);
+		contentPane.add(lblVnligenSkrivIn);
+		lblVnligenSkrivIn.setHorizontalAlignment(JLabel.CENTER);
+		
+		JButton btnSk = new JButton("S\u00F6k");
+		btnSk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cNumber = textField_sok.getText();
+				if(controller.database.findKundBoolean(cNumber)){
+					Kund kTemp = controller.database.findKund(cNumber);
+					textField_name.setText(kTemp.getNamn());
+					textField_kundnr.setText(kTemp.getKundnr());
+					textField_fakturaadress.setText(kTemp.getFakturaadress());
+					textField_leveransadress.setText(kTemp.getLeveransadress());
+					textField_tfnnr.setText(kTemp.getTelefonnr());
+					textField_email.setText(kTemp.getEmail());
+					textField_rabattniva.setText(kTemp.getRabattnivå());
+					textField_kontaktperson.setText(kTemp.getKontaktperson());
+					textField_bestallare.setText(kTemp.getBestallare());
+					textField_postnr.setText(kTemp.getPostnr());
+					textField_stad.setText(kTemp.getStad());
+					lblsvar.setText("Customer found!");
+				}else{
+					lblsvar.setText("Customer not found");
+				}
+//				if (tmpCustomer != null){
+//					textField_name.setText(tmpCustomer[0]);
+//					textField_kundnr.setText(tmpCustomer[1]);
+//					textField_fakturaadress.setText(tmpCustomer[2]);
+//					textField_leveransadress.setText(tmpCustomer[3]);
+//					textField_tfnnr.setText(tmpCustomer[4]);
+//					textField_email.setText(tmpCustomer[5]);
+//					textField_rabattniva.setText(tmpCustomer[6]);
+//					textField_kontaktperson.setText(tmpCustomer[7]);
+//					textField_bestallare.setText(tmpCustomer[8]);
+//					
+//				} else {
+//					lblsvar.setText("Response: Customer not found");
+//				}
+			}
+		});
+		btnSk.setBounds(184, 111, 89, 23);
+		contentPane.add(btnSk);
+		btnSk.setHorizontalAlignment(JButton.CENTER);
+
+		
+		JButton btnAvbryt = new JButton("Avbryt");
+		btnAvbryt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false); //you can't see me!
+				dispose();
+			}
+		});
+		btnAvbryt.setBounds(335, 488, 89, 23);
+		contentPane.add(btnAvbryt);
+		
+		JLabel lblxxxxxxxxxx = new JLabel("(XXXXXX-XXXX)");
+		lblxxxxxxxxxx.setBounds(173, 86, 111, 14);
+		contentPane.add(lblxxxxxxxxxx);
+		lblxxxxxxxxxx.setHorizontalAlignment(JLabel.CENTER);
+		
+		textField_name = new JTextField();
+		textField_name.setBounds(157, 140, 141, 20);
+		contentPane.add(textField_name);
+		textField_name.setColumns(10);
+		textField_name.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_kundnr = new JTextField();
+		textField_kundnr.setBounds(158, 171, 141, 20);
+		contentPane.add(textField_kundnr);
+		textField_kundnr.setColumns(10);
+		textField_kundnr.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_fakturaadress = new JTextField();
+		textField_fakturaadress.setBounds(158, 202, 141, 20);
+		contentPane.add(textField_fakturaadress);
+		textField_fakturaadress.setColumns(10);
+		textField_fakturaadress.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_leveransadress = new JTextField();
+		textField_leveransadress.setBounds(158, 233, 141, 20);
+		contentPane.add(textField_leveransadress);
+		textField_leveransadress.setColumns(10);
+		textField_leveransadress.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_tfnnr = new JTextField();
+		textField_tfnnr.setBounds(158, 264, 141, 20);
+		contentPane.add(textField_tfnnr);
+		textField_tfnnr.setColumns(10);
+		textField_tfnnr.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_email = new JTextField();
+		textField_email.setBounds(158, 295, 141, 20);
+		contentPane.add(textField_email);
+		textField_email.setColumns(10);
+		textField_email.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_rabattniva = new JTextField();
+		textField_rabattniva.setBounds(157, 326, 141, 20);
+		contentPane.add(textField_rabattniva);
+		textField_rabattniva.setColumns(10);
+		textField_rabattniva.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_kontaktperson = new JTextField();
+		textField_kontaktperson.setBounds(158, 357, 141, 20);
+		contentPane.add(textField_kontaktperson);
+		textField_kontaktperson.setColumns(10);
+		textField_kontaktperson.setHorizontalAlignment(JTextField.CENTER);
+		
+		textField_bestallare = new JTextField();
+		textField_bestallare.setBounds(158, 388, 141, 20);
+		contentPane.add(textField_bestallare);
+		textField_bestallare.setColumns(10);
+		textField_bestallare.setHorizontalAlignment(JTextField.CENTER);
+		
+		lblsvar = new JLabel("");
+		lblsvar.setBounds(11, 488, 192, 23);
+		contentPane.add(lblsvar);
+		
+		textField_postnr = new JTextField();
+		textField_postnr.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_postnr.setColumns(10);
+		textField_postnr.setBounds(158, 419, 141, 20);
+		contentPane.add(textField_postnr);
+		
+		textField_stad = new JTextField();
+		textField_stad.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_stad.setColumns(10);
+		textField_stad.setBounds(158, 450, 141, 20);
+		contentPane.add(textField_stad);
+		
+		btnRadera = new JButton("Radera kund");
+		btnRadera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cNumberRemove = textField_kundnr.getText();
+				kontroller.removeCustomer(cNumberRemove);
+				lblsvar.setText("Customer Removed");
+				textField_name.setText("");
+				textField_kundnr.setText("");
+				textField_fakturaadress.setText("");
+				textField_leveransadress.setText("");
+				textField_email.setText("");
+				textField_tfnnr.setText("");
+				textField_bestallare.setText("");
+				textField_rabattniva.setText("");
+				textField_kontaktperson.setText("");
+				textField_postnr.setText("");
+				textField_stad.setText("");
+			}
+		});
+		btnRadera.setBounds(213, 488, 112, 23);
+		contentPane.add(btnRadera);
+		
+		
+	}
+}

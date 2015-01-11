@@ -1,0 +1,37 @@
+package allt;
+
+import java.util.ArrayList;
+
+public class Kundvagn {
+	
+	int ordernr = 0;
+	int totalkostnad = 0;
+	private ArrayList<Produkt> kundvagn = new ArrayList<Produkt>();
+
+	
+	public ArrayList<Produkt> getList(){
+		return kundvagn;
+	}
+	
+	public int getTotalkostnad(){
+		return totalkostnad;
+	}
+	
+	public void setTotalkostnad (){
+		for (Produkt p : kundvagn){
+			int i = Integer.parseInt(p.getKilopris());
+			totalkostnad+=i;
+		}
+	}
+
+	public void setOrderNumber(int i) {
+		ordernr = i;
+		
+	}
+	
+	public int getOrderNumber(){
+		return ordernr;
+	}
+	
+	
+}

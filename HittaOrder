@@ -1,0 +1,147 @@
+package allt;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+
+public class HittaOrder extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_order;
+	private JLabel lblresponse;
+	private JTextField textField_kund;
+	private JButton btnSk;
+	private JLabel lblNewLabel;
+	private JTextArea textArea;
+	private JLabel lblNewLabel_1;
+	private JTextArea textArea_levinfo;
+	private JLabel lblLeveransinformation;
+	private JButton btnNewButton;
+	private JButton btnNySkning;
+	private JLabel lbltotalkostnad;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//HittaOrder frame = new HittaOrder();
+					//frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public HittaOrder(Controller controller) {
+		setTitle("Hitta order");
+		Controller kontroller = controller;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 450);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField_order = new JTextField();
+		textField_order.setBounds(159, 34, 121, 20);
+		contentPane.add(textField_order);
+		textField_order.setColumns(10);
+		
+		JLabel lblAngeOrdernummer = new JLabel("Ange ordernummer");
+		lblAngeOrdernummer.setBounds(165, 11, 121, 20);
+		contentPane.add(lblAngeOrdernummer);
+		
+		lblresponse = new JLabel("");
+		lblresponse.setBounds(178, 65, 121, 20);
+		contentPane.add(lblresponse);
+		
+		textField_kund = new JTextField();
+		textField_kund.setBounds(159, 152, 121, 20);
+		contentPane.add(textField_kund);
+		textField_kund.setColumns(10);
+		
+		btnSk = new JButton("S\u00F6k");
+		btnSk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tmp = textField_order.getText();
+				int i = Integer.parseInt(tmp);
+				for (Kund k : kontroller.database.getKundlista()){
+					for (Kundvagn kv : k.getKundvagn()){
+						if (kv.getOrderNumber()==i){
+							textField_kund.setText(k.getKundnr());
+							textArea_levinfo.append(k.getNamn()+"\n"+k.getLeveransadress()+"\n"+k.getPostnr()+"\n"+k.getStad()+"\n"+k.getTelefonnr()+"\n");
+							for(int j = 0 ; j<kv.getList().size();j++){
+								System.out.println(kv.getList().get(j).getProduktnamn() + ", " + kv.getList().get(j).getSpecifikation() + ", " + kv.getList().get(j).getVikt() + ", " + kv.getList().get(j).getKilopris()+"\n");
+								String temp = new String();
+								textArea.append(kv.getList().get(j).getProduktnamn() + ", " + kv.getList().get(j).getSpecifikation() + ", " + kv.getList().get(j).getVikt() + ", " + kv.getList().get(j).getKilopris()+"\n");
+								lblresponse.setText("Order hittad!");
+								lbltotalkostnad.setText("Totalkostnad: "+kv.getTotalkostnad()+" kr.");
+							}
+//							
+//							}
+						}
+					}
+					
+				}
+			}
+		});
+		btnSk.setBounds(174, 97, 89, 23);
+		contentPane.add(btnSk);
+		
+		lblNewLabel = new JLabel("Kundnummer");
+		lblNewLabel.setBounds(180, 131, 83, 20);
+		contentPane.add(lblNewLabel);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(243, 201, 168, 170);
+		contentPane.add(textArea);
+		
+		lblNewLabel_1 = new JLabel("Best\u00E4llda Varor");
+		lblNewLabel_1.setBounds(243, 183, 114, 20);
+		contentPane.add(lblNewLabel_1);
+		
+		textArea_levinfo = new JTextArea();
+		textArea_levinfo.setBounds(32, 201, 168, 170);
+		contentPane.add(textArea_levinfo);
+		
+		lblLeveransinformation = new JLabel("Leveransinformation");
+		lblLeveransinformation.setBounds(32, 183, 126, 20);
+		contentPane.add(lblLeveransinformation);
+		
+		btnNewButton = new JButton("Avbryt\r\n");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(322, 378, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		btnNySkning = new JButton("Ny s\u00F6kning");
+		btnNySkning.setBounds(216, 378, 96, 23);
+		contentPane.add(btnNySkning);
+		
+		lbltotalkostnad = new JLabel("");
+		lbltotalkostnad.setBounds(42, 381, 152, 20);
+		contentPane.add(lbltotalkostnad);
+	}
+}

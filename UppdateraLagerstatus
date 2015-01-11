@@ -1,0 +1,132 @@
+package allt;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JSeparator;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class UppdateraLagerstatus extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_pnr;
+	private JTextField textField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//UppdateraLagerstatus frame = new UppdateraLagerstatus();
+					//frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public UppdateraLagerstatus(Controller controller) {
+		Controller kontroller = controller;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 330);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField_pnr = new JTextField();
+		textField_pnr.setBounds(175, 47, 89, 20);
+		contentPane.add(textField_pnr);
+		textField_pnr.setColumns(10);
+		
+		JLabel lbl_pnummer = new JLabel("Skriv in produktnummer");
+		lbl_pnummer.setToolTipText("CENTER");
+		lbl_pnummer.setBounds(150, 16, 159, 20);
+		contentPane.add(lbl_pnummer);
+		
+		JLabel lbl_soksvar = new JLabel("");
+		lbl_soksvar.setBounds(130, 115, 200, 23);
+		contentPane.add(lbl_soksvar);
+		
+		JButton btnSk = new JButton("S\u00F6k");
+		btnSk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String pnr = textField_pnr.getText();
+				if(controller.database.findProdBoolean(pnr)){
+					Produkt pTemp = controller.database.findProdukt(pnr);
+					lbl_soksvar.setText("Produkt hittad. Antal i lager: "+ pTemp.getAntal());
+					
+				}
+			}
+		});
+		btnSk.setBounds(177, 78, 89, 23);
+		contentPane.add(btnSk);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 149, 414, 2);
+		contentPane.add(separator);
+		
+		JLabel lblSkrivInAntal = new JLabel("Skriv in antal");
+		lblSkrivInAntal.setToolTipText("CENTER");
+		lblSkrivInAntal.setBounds(180, 162, 116, 20);
+		contentPane.add(lblSkrivInAntal);
+		
+		JLabel lbl_andringssvar = new JLabel("");
+		lbl_andringssvar.setBounds(115, 227, 260, 20);
+		contentPane.add(lbl_andringssvar);
+		
+		JButton btnLggTill = new JButton("L\u00E4gg till");
+		btnLggTill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nyttantal = textField_1.getText();
+				int i = Integer.parseInt(nyttantal);
+				String pnr = textField_pnr.getText();
+				if(controller.database.findProdBoolean(pnr)){
+					Produkt pTemp = controller.database.findProdukt(pnr);
+					pTemp.laggTill(i);
+					System.out.println(pTemp.getAntal());
+					lbl_andringssvar.setText("Lagerstatus uppdaterad. Antal i lager: "+pTemp.getAntal());
+				}
+			}
+		});
+		btnLggTill.setBounds(103, 258, 89, 23);
+		contentPane.add(btnLggTill);
+		
+		JButton btnTaBort = new JButton("Ta bort");
+		btnTaBort.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nyttantal = textField_1.getText();
+				int i = Integer.parseInt(nyttantal);
+				String pnr = textField_pnr.getText();
+				if(controller.database.findProdBoolean(pnr)){
+					Produkt pTemp = controller.database.findProdukt(pnr);
+					pTemp.taBort(i);
+					lbl_andringssvar.setText("Lagerstatus uppdaterad. Antal i lager: "+pTemp.getAntal());
+				}
+			}
+		});
+		btnTaBort.setBounds(278, 258, 89, 23);
+		contentPane.add(btnTaBort);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(175, 183, 89, 20);
+		contentPane.add(textField_1);
+		
+		
+	}
+}

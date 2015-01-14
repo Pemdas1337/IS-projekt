@@ -2,90 +2,90 @@ package allt;
 
 public class Produkt {
 		
-	private String produktnamn;
-	private String produktnr;
-	private String batchkod;
-	private String lagerfilial;
-	private String specifikation;
-	private String lagerplats;
-	private String vikt;
-	private String kilopris;
-	private int antal;
+	private String pProduktnamn;
+	private String pProduktnr;
+	private String pBatchkod;
+	private String pLagerfilial;
+	private String pSpecifikation;
+	private String pLagerplats;
+	private String pVikt;
+	private String pPris;
+	private int pAntal;
 	
 	public int getAntal() {
-		return antal;
+		return pAntal;
 	}
 	public void setAntal(int antal) {
-		this.antal = antal;
+		this.pAntal = antal;
 	}
 	public String getProduktnamn() {
-		return produktnamn;
+		return pProduktnamn;
 	}
 	public void setProduktnamn(String produktnamn) {
-		this.produktnamn = produktnamn;
+		this.pProduktnamn = produktnamn;
 	}
 	public String getProduktnr() {
-		return produktnr;
+		return pProduktnr;
 	}
 	public void setProduktnr(String produktnr) {
-		this.produktnr = produktnr;
+		this.pProduktnr = produktnr;
 	}
 	public String getBatchkod() {
-		return batchkod;
+		return pBatchkod;
 	}
 	public void setBatchkod(String batchkod) {
-		this.batchkod = batchkod;
+		this.pBatchkod = batchkod;
 	}
 	public String getLagerfilial() {
-		return lagerfilial;
+		return pLagerfilial;
 	}
 	public void setLagerfilial(String lagerfilial) {
-		this.lagerfilial = lagerfilial;
+		this.pLagerfilial = lagerfilial;
 	}
 	public String getSpecifikation() {
-		return specifikation;
+		return pSpecifikation;
 	}
 	public void setSpecifikation(String specifikation) {
-		this.specifikation = specifikation;
+		this.pSpecifikation = specifikation;
 	}
 	public String getLagerplats() {
-		return lagerplats;
+		return pLagerplats;
 	}
 	public void setLagerplats(String lagerplats) {
-		this.lagerplats = lagerplats;
+		this.pLagerplats = lagerplats;
 	}
 
 	public String getVikt() {
-		return vikt;
+		return pVikt;
 	}
 	public void setVikt(String vikt) {
-		this.vikt = vikt;
+		this.pVikt = vikt;
 	}
-	public String getKilopris() {
-		return kilopris;
+	public String getPris() {
+		return pPris;
 	}
-	public void setKilopris(String kilopris) {
-		this.kilopris = kilopris;
+	public void setPris(String pris) {
+		this.pPris = pris;
 	}
 	
-	public Produkt(String Pnamn, String Pnummer, String Pbatchkod, String Plagerfilial, String Pspecifikation, String Plagerplats, String Pvikt, String Pkilopris, int antal){
-		this.setProduktnamn(Pnamn);
-		this.setProduktnr(Pnummer);
-		this.setBatchkod(Pbatchkod);
-		this.setLagerfilial(Plagerfilial);
-		this.setSpecifikation(Pspecifikation);
-		this.setLagerplats(Plagerplats);
-		this.setVikt(Pvikt);
-		this.setKilopris(Pkilopris);
-		this.setAntal(antal);
+	public Produkt(String pNamn, String pNummer, String pBatchkod, String pLagerfilial, String pSpecifikation, String pLagerplats, String pVikt, String pKilopris, int pAntal){
+		this.setProduktnamn(pNamn);
+		this.setProduktnr(pNummer);
+		this.setBatchkod(pBatchkod);
+		this.setLagerfilial(pLagerfilial);
+		this.setSpecifikation(pSpecifikation);
+		this.setLagerplats(pLagerplats);
+		this.setVikt(pVikt);
+		this.setPris(pKilopris);
+		this.setAntal(pAntal);
 	}
 	
 	public void laggTill (int summa1){
-		antal+=summa1;
+		pAntal+=summa1;
 	}
 	
 	public void taBort (int summa2){
-		antal-=summa2;
+		pAntal-=summa2;
 	}
 	
 }

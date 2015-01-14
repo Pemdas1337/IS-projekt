@@ -1,9 +1,5 @@
 package allt;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,18 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.ListModel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JTextArea;
 import javax.swing.JList;
-
-import java.awt.ScrollPane;
-import java.util.ArrayList;
-
-import javax.swing.JScrollBar;
 
 public class LaggOrder extends JFrame {
 
@@ -35,50 +23,55 @@ public class LaggOrder extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//LaggOrder frame = new LaggOrder();
-					//frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
+	
 	public LaggOrder(Controller controller) {
 		setTitle("Lägg order");
-		Controller kontroller = controller;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblVljKund = new JLabel("V\u00E4lj Kund (pnr eller org.nr)");
 		lblVljKund.setBounds(10, 23, 200, 50);
 		contentPane.add(lblVljKund);
-		
+
 		textField_kund = new JTextField();
 		textField_kund.setBounds(184, 38, 200, 20);
 		contentPane.add(textField_kund);
 		textField_kund.setColumns(10);
-		
+
 		textField_prod = new JTextField();
 		textField_prod.setBounds(184, 93, 200, 20);
 		contentPane.add(textField_prod);
 		textField_prod.setColumns(10);
-		
-		JLabel lblVljProduktprod = new JLabel("V\u00E4lj produkt (prod. nummer)");
+
+		JLabel lblVljProduktprod = new JLabel(
+				"V\u00E4lj produkt (prod. nummer)");
 		lblVljProduktprod.setBounds(10, 78, 200, 50);
 		contentPane.add(lblVljProduktprod);
 		
+		JLabel lblNewLabel = new JLabel("Kundvagn");
+		lblNewLabel.setBounds(88, 124, 200, 20);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_kundsvar = new JLabel("");
+		lblNewLabel_kundsvar.setBounds(224, 69, 200, 18);
+		contentPane.add(lblNewLabel_kundsvar);
+		
+		JLabel lblklar = new JLabel("");
+		lblklar.setBounds(142, 311, 200, 16);
+		contentPane.add(lblklar);
+		
+		JLabel lblresponse = new JLabel("");
+		lblresponse.setBounds(224, 120, 200, 20);
+		contentPane.add(lblresponse);
+
 		JButton btnAvbryt = new JButton("Avbryt");
 		btnAvbryt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -88,101 +81,71 @@ public class LaggOrder extends JFrame {
 		});
 		btnAvbryt.setBounds(335, 328, 89, 23);
 		contentPane.add(btnAvbryt);
-		
-		JLabel lblNewLabel_kundsvar = new JLabel("");
-		lblNewLabel_kundsvar.setBounds(224, 69, 200, 18);
-		contentPane.add(lblNewLabel_kundsvar);
-		
+
 		Kundvagn kv = new Kundvagn();
-		
-		JLabel lblklar = new JLabel("");
-		lblklar.setBounds(142, 311, 200, 16);
-		contentPane.add(lblklar);
-		
+
 		JButton btnFrdig = new JButton("F\u00E4rdig");
 		btnFrdig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cNumber = textField_kund.getText();
-				Kund kTemp = controller.database.findKund(cNumber);
-				//String[] tmpCustomer = kontroller.findCustomer(cNumber);
-				if(controller.database.findKundBoolean(cNumber)){
-					int i = kontroller.getOrderNumber()+1;
-					kontroller.setOrderNumber(i);
-					kv.setOrderNumber(kontroller.getOrderNumber());
-					System.out.println(kontroller.getOrderNumber());
-					kTemp.getKundvagn().add(kv);
-					lblklar.setText("Beställning lagd. Ordnernummer: "+kontroller.getOrderNumber());
-					textField_kund.setText("");
-					textField_prod.setText("");
-					listModel.removeAllElements();
-					setVisible(false);
-					dispose();
-					Response resp = new Response(controller);
-					resp.setVisible(true);
-					kv.setTotalkostnad();
-				}else{
-					lblNewLabel_kundsvar.setText("Customer not found");
-				}
-				
-				
+					Kund kTemp = controller.database.findCustomer(cNumber);
+					if (controller.findCustBoolean(cNumber)) {
+						int i = controller.getOrderNumber() + 1;
+						controller.setOrderNumber(i);
+						kv.setOrderNumber(controller.getOrderNumber());
+						System.out.println(controller.getOrderNumber());
+						kTemp.getKundvagn().add(kv);
+						lblklar.setText("Beställning lagd. Ordnernummer: "+ controller.getOrderNumber());
+						textField_kund.setText("");
+						textField_prod.setText("");
+						listModel.removeAllElements();
+						setVisible(false);
+						dispose();
+						Response resp = new Response(controller);
+						resp.setVisible(true);
+						kv.setTotalkostnad();
+					} else {
+						lblNewLabel_kundsvar.setText("Customer not found");
+					}
 			}
 		});
 		btnFrdig.setBounds(236, 328, 89, 23);
 		contentPane.add(btnFrdig);
-		
-		JLabel lblresponse = new JLabel("");
-		lblresponse.setBounds(224, 120, 200, 20);
-		contentPane.add(lblresponse);
-		
+
 		listModel = new DefaultListModel();
-		
-		
+
 		JList list = new JList(listModel);
 		JScrollPane scrollpane = new JScrollPane();
 		scrollpane.setSize(296, 150);
 		scrollpane.setLocation(88, 150);
 		scrollpane.setViewportView(list);
 		contentPane.add(scrollpane);
-		
-		
-		
+
 		JButton btnNewButton = new JButton("L\u00E4gg till i kundvagn");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tmp = new String();
 				String prodnr = textField_prod.getText();
-				if(controller.database.findProdBoolean(prodnr)){
+				if (controller.findProdBoolean(prodnr)) {
 					System.out.println("Ja");
-					Produkt pTemp = controller.database.findProdukt(prodnr);
-					kv.getList().add(pTemp);
-					tmp += pTemp.getProduktnamn() + ", " + pTemp.getKilopris() + ", " + pTemp.getSpecifikation() + ", " + pTemp.getVikt() + "\n";
-					listModel.addElement(tmp);
-					pTemp.setAntal(pTemp.getAntal()-1);
-					lblresponse.setText("Produkt hittad! Lagerstatus: "+pTemp.getAntal());
-				}else{
+					Produkt pTemp = controller.findProduct(prodnr);
+					if (pTemp.getAntal() == 0) {
+						lblresponse.setText("Produkten är slut i lager");
+					} else {
+						kv.getList().add(pTemp);
+						tmp += pTemp.getProduktnamn() + ", " + pTemp.getPris()+ " kr" + ", " + "Spec: "+ pTemp.getSpecifikation() + ", "+ pTemp.getVikt() + "\n";
+						listModel.addElement(tmp);
+						pTemp.setAntal(pTemp.getAntal() - 1);
+						lblresponse.setText("Produkt hittad! Lagerstatus: "
+								+ pTemp.getAntal());
+					}
+				} else {
 					lblresponse.setText("Product not found");
 				}
 			}
 		});
 		btnNewButton.setBounds(76, 328, 150, 23);
 		contentPane.add(btnNewButton);
-		
-		
-		JLabel lblNewLabel = new JLabel("Kundvagn");
-		lblNewLabel.setBounds(88, 124, 200, 20);
-		contentPane.add(lblNewLabel);
-		
-		
-		
-		
-		
-		
-		
 
-		
-		
-		
-		
-		
 	}
 }

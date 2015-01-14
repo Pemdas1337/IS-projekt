@@ -19,7 +19,7 @@ public class Kundvagn {
 	
 	public void setTotalkostnad (){
 		for (Produkt p : kundvagn){
-			int i = Integer.parseInt(p.getKilopris());
+			int i = Integer.parseInt(p.getPris());
 			totalkostnad+=i;
 		}
 	}

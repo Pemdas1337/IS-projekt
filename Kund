@@ -6,107 +6,107 @@ public class Kund {
 	
 		private ArrayList<Kundvagn> kundvagn = new ArrayList<Kundvagn>();
 	
-		private String namn;
-		private String fakturaadress;
-		private String leveransadress;
-		private String telefonnr;
-		private String email;
-		private String rabattnivå;
-		private String kundnr;
-		private String kontaktperson;
-		private String bestallare;
-		private String stad;
-		private String postnr;
+		private String kNamn;
+		private String kFakturaadress;
+		private String kLeveransadress;
+		private String kTelefonnr;
+		private String kEmail;
+		private String kRabattnivå;
+		private String kKundnr;
+		private String kKontaktperson;
+		private String kBestallare;
+		private String kStad;
+		private String kPostnr;
 				
 		public String getNamn() {
-			return this.namn;
+			return this.kNamn;
 		}
 		public void setNamn(String namn) {
-			this.namn = namn;
+			this.kNamn = namn;
 		}
 		public String getFakturaadress() {
-			return this.fakturaadress;
+			return this.kFakturaadress;
 		}
 		public void setFakturaadress(String fakturaadress) {
-			this.fakturaadress = fakturaadress;
+			this.kFakturaadress = fakturaadress;
 		}
 		public String getLeveransadress() {
-			return this.leveransadress;
+			return this.kLeveransadress;
 		}
 		public void setLeveransadress(String leveransadress) {
-			this.leveransadress = leveransadress;
+			this.kLeveransadress = leveransadress;
 		}
 		public String getTelefonnr() {
-			return this.telefonnr;
+			return this.kTelefonnr;
 		}
 		public void setTelefonnr(String telefonnr) {
-			this.telefonnr = telefonnr;
+			this.kTelefonnr = telefonnr;
 		}
 		public String getEmail() {
-			return this.email;
+			return this.kEmail;
 		}
 		public void setEmail(String email) {
-			this.email = email;
+			this.kEmail = email;
 		}
 		public String getRabattnivå() {
-			return this.rabattnivå;
+			return this.kRabattnivå;
 		}
 		public void setRabattnivå(String rabattnivå) {
-			this.rabattnivå = rabattnivå;
+			this.kRabattnivå = rabattnivå;
 		}
 		
 		public String getKundnr() {
-			return this.kundnr;
+			return this.kKundnr;
 		}
 		
 		public void setKundnr(String kundnr) {
-			this.kundnr = kundnr;
+			this.kKundnr = kundnr;
 		}
 		
 		public void setKontaktperson(String kontaktperson) {
-			this.kontaktperson = kontaktperson;
+			this.kKontaktperson = kontaktperson;
 		}
 		
 		public String getKontaktperson() {
-			return this.kontaktperson;
+			return this.kKontaktperson;
 		}
 		
 		public void setBestallare(String bestallare) {
-			this.bestallare = bestallare;
+			this.kBestallare = bestallare;
 		}
 		
 		public String getBestallare (){
-			return this.bestallare;
+			return this.kBestallare;
 		}
 		
 		public String getPostnr(){
-			return this.postnr;
+			return this.kPostnr;
 		}
 		
 		public void setPostnr (String postnr){
-			this.postnr = postnr;
+			this.kPostnr = postnr;
 		}
 		
 		public String getStad(){
-			return this.stad;
+			return this.kStad;
 		}
 		
 		public void setStad(String stad){
-			this.stad = stad;
+			this.kStad = stad;
 		}
 		
-		public Kund(String Cnamn, String Cnummer, String Cfakturaadress, String Cleveransadress, String Ctfnnr, String Cemail, String Crabattniva, String Ckontaktperson, String Cbestallare, String Cpostnr, String Cstad) {
-			this.setKundnr(Cnummer);
-			this.setNamn(Cnamn);
-			this.setEmail(Cemail);
-			this.setFakturaadress(Cfakturaadress);
-			this.setLeveransadress(Cleveransadress);
-			this.setRabattnivå(Crabattniva);
-			this.setTelefonnr(Ctfnnr);
-			this.setKontaktperson(Ckontaktperson);
-			this.setBestallare(Cbestallare);
-			this.setPostnr(Cpostnr);
-			this.setStad(Cstad);
+		public Kund(String cNamn, String cNummer, String cFakturaadress, String cLeveransadress, String cTfnnr, String cEmail, String cRabattniva, String cKontaktperson, String cBestallare, String cPostnr, String cStad) {
+			this.setKundnr(cNummer);
+			this.setNamn(cNamn);
+			this.setEmail(cEmail);
+			this.setFakturaadress(cFakturaadress);
+			this.setLeveransadress(cLeveransadress);
+			this.setRabattnivå(cRabattniva);
+			this.setTelefonnr(cTfnnr);
+			this.setKontaktperson(cKontaktperson);
+			this.setBestallare(cBestallare);
+			this.setPostnr(cPostnr);
+			this.setStad(cStad);
 		}
 		
 		public ArrayList<Kundvagn> getKundvagn(){
@@ -115,3 +115,4 @@ public class Kund {
 		
 	}
 	
+

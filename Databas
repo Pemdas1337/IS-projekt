@@ -1,85 +1,62 @@
 package allt;
 
-import java.util.*;
+import java.util.ArrayList;
 
-public class Databas {
-	
-	private ArrayList<Kund> kunder = new ArrayList<Kund>();
-	
-	private ArrayList<Produkt> produkter = new ArrayList<Produkt>();
-	
-	public void addProdukter(Produkt nyProdukt){
-		produkter.add(nyProdukt);
-	}
-	
-	public void addKunder(Kund nyKunder) {
-		kunder.add(nyKunder);
-	}
 
-	public void removeKund(String kundnr) {
-		Kund k = this.findKund(kundnr);
-		if (k != null) {
-			this.kunder.remove(k);
-		}
+public class Controller {
+	Databas database;
+	
+	private int raknare = 0;
+	
+	public Controller(){
+		database = new Databas();
 	}
-
-	public Kund findKund(String kundnr) {
-		boolean svar = false;
-		for (Kund k : this.kunder) {
-			if (k.getKundnr().equals(kundnr)) {
-				svar = true;
-				return k;
-				
-			}
-		}
-		if(!svar){
-			System.out.println("Hittar ingen kund");
-		}
-		return null;
+	public void addCustomer(String cNamn, String cNummer, String cFakturaadress, String cLeveransadress, String cTfnnr, String cEmail, String cRabattniva, String cKontaktperson, String cBestallare, String cPostnr, String cStad) {
+		Kund tmpCustomer = new Kund(cNamn, cNummer, cFakturaadress, cLeveransadress, cTfnnr, cEmail, cRabattniva, cKontaktperson, cBestallare, cPostnr, cStad);
+		database.addCustomer(tmpCustomer);
 	}
 	
-	public boolean findKundBoolean(String kundnr) {
-		for (Kund k : this.kunder) {
-			if (k.getKundnr().equals(kundnr)) {
-				return true;
-				
-				
-			}
+	public void removeCustomer(String cNumberRemove) {
+		database.removeCustomer(cNumberRemove);
+	}
+		
+	public void addProduct(String pNamn, String pNummer, String pBatchkod, String pLagerfilial, String pSpecifikation, String pLagerplats, String pVikt, String pPris, int pAntal){
+		Produkt tmpProduct = new Produkt(pNamn, pNummer, pBatchkod, pLagerfilial, pSpecifikation, pLagerplats, pVikt, pPris, pAntal);
+		database.addProduct(tmpProduct);
+	}
+		
+	public int getOrderNumber(){
+		return raknare;
+	}
+	
+	public void setOrderNumber(int nr){
+		raknare = nr;
+	}
+	
+	public Boolean findProdBoolean (String prodnr){
+		if(database.findProdBoolean(prodnr)){
+			return true;
 		}
 		return false;
 	}
 	
-	public boolean findProdBoolean(String prodnr) {
-		for (Produkt p : this.produkter) {
-			if (p.getProduktnr().equals(prodnr)) {
-				return true;
-				
-				
-			}
+	public Boolean findCustBoolean (String kundnr){
+		if(database.findCustBoolean(kundnr)){
+			return true;	
 		}
 		return false;
 	}
 	
-	public Produkt findProdukt(String prodnr) {
-		boolean svar = false;
-		for (Produkt p : this.produkter) {
-			if (p.getProduktnr().equals(prodnr)) {
-				svar = true;
-				return p;
-				
-			}
-		}
-		if(!svar){
-			System.out.println("Hittar ingen produkt");
-		}
-		return null;
+	public Produkt findProduct(String prodnr){
+		return database.findProdukt(prodnr);
+		
 	}
 	
-	public ArrayList<Kund> getKundlista(){
-		return kunder;
+	public Kund findCustomer(String kundnr){
+		return database.findCustomer(kundnr);
 	}
 	
-
-	
-	
+	public ArrayList<Kund> getCustomerList(){
+		return database.getCustomerList();
+	}
 }

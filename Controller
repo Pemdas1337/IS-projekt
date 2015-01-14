@@ -1,5 +1,7 @@
 package allt;
 
+import java.util.ArrayList;
+
 
 public class Controller {
 	Databas database;
@@ -9,48 +11,18 @@ public class Controller {
 	public Controller(){
 		database = new Databas();
 	}
-	public void addCustomer(String Cnamn, String Cnummer, String Cfakturaadress, String Cleveransadress, String Ctfnnr, String Cemail, String Crabattniva, String Ckontaktperson, String Cbestallare, String Cpostnr, String Cstad) {
-		Kund tmpCustomer = new Kund(Cnamn, Cnummer, Cfakturaadress, Cleveransadress, Ctfnnr, Cemail, Crabattniva, Ckontaktperson, Cbestallare, Cpostnr, Cstad);
-		database.addKunder(tmpCustomer);
+	public void addCustomer(String cNamn, String cNummer, String cFakturaadress, String cLeveransadress, String cTfnnr, String cEmail, String cRabattniva, String cKontaktperson, String cBestallare, String cPostnr, String cStad) {
+		Kund tmpCustomer = new Kund(cNamn, cNummer, cFakturaadress, cLeveransadress, cTfnnr, cEmail, cRabattniva, cKontaktperson, cBestallare, cPostnr, cStad);
+		database.addCustomer(tmpCustomer);
 	}
 	
 	public void removeCustomer(String cNumberRemove) {
-		database.removeKund(cNumberRemove);
+		database.removeCustomer(cNumberRemove);
 	}
-	
-	public String[] findCustomer(String cNumberFind) {
-		 Kund c;
-		 String[] aCust = new String[11];
-		 c = database.findKund(cNumberFind);
-		 System.out.println("Fått kundobjekt");
-		 aCust[0] = c.getNamn();
-		 aCust[1] = c.getKundnr();
-		 aCust[2] = c.getFakturaadress();
-		 aCust[3] = c.getLeveransadress();
-		 aCust[4] = c.getTelefonnr();
-		 aCust[5] = c.getEmail();
-		 aCust[6] = c.getRabattnivå();
-		 aCust[7] = c.getKontaktperson();
-		 aCust[8] = c.getBestallare();
-		 aCust[9] = c.getPostnr();
-		 aCust[10] = c.getStad();
-		 return aCust;
-	}
-	
-	public void addProduct(String Pnamn, String Pnummer, String Pbatchkod, String Plagerfilial, String Pspecifikation, String Plagerplats, String Pvikt, String Pkilopris, int antal){
-		Produkt tmpProduct = new Produkt(Pnamn, Pnummer, Pbatchkod, Plagerfilial, Pspecifikation, Plagerplats, Pvikt, Pkilopris, antal);
-		database.addProdukter(tmpProduct);
-	}
-	
-	public String[] findProduct(String pNumberFind){
-		Produkt p;
-		String[] aProd = new String [4];
-		p = database.findProdukt(pNumberFind);
-		aProd[0] = p.getProduktnamn();
-		aProd[1] = p.getSpecifikation();
-		aProd[2] = p.getVikt();
-		aProd[3] = p.getKilopris();
-		return aProd;
+		
+	public void addProduct(String pNamn, String pNummer, String pBatchkod, String pLagerfilial, String pSpecifikation, String pLagerplats, String pVikt, String pPris, int pAntal){
+		Produkt tmpProduct = new Produkt(pNamn, pNummer, pBatchkod, pLagerfilial, pSpecifikation, pLagerplats, pVikt, pPris, pAntal);
+		database.addProduct(tmpProduct);
 	}
 		
 	public int getOrderNumber(){
@@ -59,5 +31,32 @@ public class Controller {
 	
 	public void setOrderNumber(int nr){
 		raknare = nr;
+	}
+	
+	public Boolean findProdBoolean (String prodnr){
+		if(database.findProdBoolean(prodnr)){
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean findCustBoolean (String kundnr){
+		if(database.findCustBoolean(kundnr)){
+			return true;	
+		}
+		return false;
+	}
+	
+	public Produkt findProduct(String prodnr){
+		return database.findProdukt(prodnr);
+		
+	}
+	
+	public Kund findCustomer(String kundnr){
+		return database.findCustomer(kundnr);
+	}
+	
+	public ArrayList<Kund> getCustomerList(){
+		return database.getCustomerList();
 	}
 }

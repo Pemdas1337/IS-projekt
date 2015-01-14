@@ -1,7 +1,5 @@
 package allt;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
@@ -32,11 +29,6 @@ public class ReggaKund extends JFrame {
 	private JLabel lblKundnrpersonnrorgnr;
 	private JButton btnSpara;
 	private JButton btnAvbryta;
-	private Databas customerReg = new Databas();
-	private JFrame customerFrame;
-
-	private Controller kontroll; // Koppling till klassen Controller
-	private Databas customerRegister;
 	private JLabel lblresponse;
 	private JButton btnRensaFlt;
 	private JTextField textField_postnr;
@@ -47,25 +39,13 @@ public class ReggaKund extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// ReggaKund frame = new ReggaKund();
-					// frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
+	
 	public ReggaKund(Controller controller) {
 		setTitle("Registrera kund");
-		Controller kontroller = controller;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 456);
 		contentPane = new JPanel();
@@ -137,8 +117,7 @@ public class ReggaKund extends JFrame {
 		contentPane.add(textField_KontaktPerson);
 		textField_KontaktPerson.setColumns(10);
 
-		lblBestllarefretagskund = new JLabel(
-				"Best\u00E4llare (f\u00F6retagskund)");
+		lblBestllarefretagskund = new JLabel("Best\u00E4llare (f\u00F6retagskund)");
 		lblBestllarefretagskund.setBounds(35, 277, 145, 14);
 		contentPane.add(lblBestllarefretagskund);
 
@@ -147,20 +126,41 @@ public class ReggaKund extends JFrame {
 		contentPane.add(textField_Bestallare);
 		textField_Bestallare.setColumns(10);
 
-		lblKontaktpersonfretagskund = new JLabel(
-				"Kontaktperson (f\u00F6retagskund)");
+		lblKontaktpersonfretagskund = new JLabel("Kontaktperson (f\u00F6retagskund)");
 		lblKontaktpersonfretagskund.setBounds(6, 246, 174, 14);
 		contentPane.add(lblKontaktpersonfretagskund);
 
 		lblKundnrpersonnrorgnr = new JLabel("Kundnr (personnr/org.nr)");
 		lblKundnrpersonnrorgnr.setBounds(35, 61, 145, 14);
 		contentPane.add(lblKundnrpersonnrorgnr);
+		
+		lblresponse = new JLabel("");
+		lblresponse.setBounds(281, 342, 145, 31);
+		contentPane.add(lblresponse);
+		
+		textField_postnr = new JTextField();
+		textField_postnr.setColumns(10);
+		textField_postnr.setBounds(180, 305, 86, 20);
+		contentPane.add(textField_postnr);
+
+		textField_stad = new JTextField();
+		textField_stad.setColumns(10);
+		textField_stad.setBounds(180, 335, 86, 20);
+		contentPane.add(textField_stad);
+
+		lblPostnummer = new JLabel("Postnummer");
+		lblPostnummer.setBounds(100, 308, 80, 14);
+		contentPane.add(lblPostnummer);
+
+		lblStad = new JLabel("Stad");
+		lblStad.setBounds(144, 338, 36, 14);
+		contentPane.add(lblStad);
 
 		btnSpara = new JButton("Spara");
 		btnSpara.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String Cnummer = textField_KundNr.getText();
-				if (controller.database.findKundBoolean(Cnummer)) {
+				String cNummer = textField_KundNr.getText();
+				if (controller.findCustBoolean(cNummer)) {
 					lblresponse.setText("Customer already exists!");
 					textField_Namn.setText("");
 					textField_KundNr.setText("");
@@ -174,22 +174,22 @@ public class ReggaKund extends JFrame {
 					textField_postnr.setText("");
 					textField_stad.setText("");
 				} else {
-					String Cnamn = textField_Namn.getText();
-					String Cfakturaadress = textField_FaktureringsAdress.getText();
-					String Cleveransadress = textField_LeveransAdress.getText();
-					String Ctfnnr = textField_TelefonNr.getText();
-					String Cemail = textField_Email.getText();
-					String Crabattniva = textField_RabattNiva.getText();
-					String Ckontaktperson = textField_KontaktPerson.getText();
-					String Cbestallare = textField_Bestallare.getText();
-					String Cpostnr = textField_postnr.getText();
-					String Cstad = textField_stad.getText();
+					String cNamn = textField_Namn.getText();
+					String cFakturaadress = textField_FaktureringsAdress.getText();
+					String cLeveransadress = textField_LeveransAdress.getText();
+					String cTfnnr = textField_TelefonNr.getText();
+					String cEmail = textField_Email.getText();
+					String cRabattniva = textField_RabattNiva.getText();
+					String cKontaktperson = textField_KontaktPerson.getText();
+					String cBestallare = textField_Bestallare.getText();
+					String cPostnr = textField_postnr.getText();
+					String cStad = textField_stad.getText();
 					System.out.println(textField_Bestallare.getText());
 					System.out.println(textField_TelefonNr.getText());
 					// try {
-					kontroller.addCustomer(Cnamn, Cnummer, Cfakturaadress,
-							Cleveransadress, Ctfnnr, Cemail, Crabattniva,
-							Ckontaktperson, Cbestallare, Cpostnr, Cstad);
+					controller.addCustomer(cNamn, cNummer, cFakturaadress,
+							cLeveransadress, cTfnnr, cEmail, cRabattniva,
+							cKontaktperson, cBestallare, cPostnr, cStad);
 					lblresponse.setText("Customer saved!");
 				}
 				// } catch (NullPointerException ed){
@@ -212,10 +212,6 @@ public class ReggaKund extends JFrame {
 		btnAvbryta.setBounds(337, 384, 89, 23);
 		contentPane.add(btnAvbryta);
 
-		lblresponse = new JLabel("");
-		lblresponse.setBounds(281, 342, 145, 31);
-		contentPane.add(lblresponse);
-
 		btnRensaFlt = new JButton("Rensa f\u00E4lt");
 		btnRensaFlt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -236,22 +232,5 @@ public class ReggaKund extends JFrame {
 		btnRensaFlt.setBounds(122, 384, 106, 23);
 		contentPane.add(btnRensaFlt);
 
-		textField_postnr = new JTextField();
-		textField_postnr.setColumns(10);
-		textField_postnr.setBounds(180, 305, 86, 20);
-		contentPane.add(textField_postnr);
-
-		textField_stad = new JTextField();
-		textField_stad.setColumns(10);
-		textField_stad.setBounds(180, 335, 86, 20);
-		contentPane.add(textField_stad);
-
-		lblPostnummer = new JLabel("Postnummer");
-		lblPostnummer.setBounds(100, 308, 80, 14);
-		contentPane.add(lblPostnummer);
-
-		lblStad = new JLabel("Stad");
-		lblStad.setBounds(144, 338, 36, 14);
-		contentPane.add(lblStad);
 	}
 }

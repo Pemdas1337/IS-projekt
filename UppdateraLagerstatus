@@ -1,6 +1,5 @@
 package allt;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,26 +22,15 @@ public class UppdateraLagerstatus extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//UppdateraLagerstatus frame = new UppdateraLagerstatus();
-					//frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
+	
 	public UppdateraLagerstatus(Controller controller) {
-		Controller kontroller = controller;
+		setTitle("Uppdatera lagerstatus");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 330);
+		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,22 +47,8 @@ public class UppdateraLagerstatus extends JFrame {
 		contentPane.add(lbl_pnummer);
 		
 		JLabel lbl_soksvar = new JLabel("");
-		lbl_soksvar.setBounds(130, 115, 200, 23);
+		lbl_soksvar.setBounds(49, 115, 375, 23);
 		contentPane.add(lbl_soksvar);
-		
-		JButton btnSk = new JButton("S\u00F6k");
-		btnSk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String pnr = textField_pnr.getText();
-				if(controller.database.findProdBoolean(pnr)){
-					Produkt pTemp = controller.database.findProdukt(pnr);
-					lbl_soksvar.setText("Produkt hittad. Antal i lager: "+ pTemp.getAntal());
-					
-				}
-			}
-		});
-		btnSk.setBounds(177, 78, 89, 23);
-		contentPane.add(btnSk);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 149, 414, 2);
@@ -86,8 +60,29 @@ public class UppdateraLagerstatus extends JFrame {
 		contentPane.add(lblSkrivInAntal);
 		
 		JLabel lbl_andringssvar = new JLabel("");
-		lbl_andringssvar.setBounds(115, 227, 260, 20);
+		lbl_andringssvar.setBounds(105, 207, 260, 20);
 		contentPane.add(lbl_andringssvar);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(175, 183, 89, 20);
+		contentPane.add(textField_1);
+		
+		JButton btnSk = new JButton("S\u00F6k");
+		btnSk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String pnr = textField_pnr.getText();
+				if(controller.findProdBoolean(pnr)){
+					Produkt pTemp = controller.findProduct(pnr);
+					lbl_soksvar.setText("Produkt hittad! Produkt: "+pTemp.getProduktnamn()+". Vikt: "+pTemp.getVikt() +".  Antal i lager: "+ pTemp.getAntal());
+					
+				} else {
+					lbl_soksvar.setText("Produkt ej hittad");
+				}
+			}
+		});
+		btnSk.setBounds(175, 78, 89, 23);
+		contentPane.add(btnSk);
 		
 		JButton btnLggTill = new JButton("L\u00E4gg till");
 		btnLggTill.addActionListener(new ActionListener() {
@@ -103,7 +98,7 @@ public class UppdateraLagerstatus extends JFrame {
 				}
 			}
 		});
-		btnLggTill.setBounds(103, 258, 89, 23);
+		btnLggTill.setBounds(83, 238, 89, 23);
 		contentPane.add(btnLggTill);
 		
 		JButton btnTaBort = new JButton("Ta bort");
@@ -119,14 +114,20 @@ public class UppdateraLagerstatus extends JFrame {
 				}
 			}
 		});
-		btnTaBort.setBounds(278, 258, 89, 23);
+		btnTaBort.setBounds(277, 238, 89, 23);
 		contentPane.add(btnTaBort);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(175, 183, 89, 20);
-		contentPane.add(textField_1);
-		
+		JButton btnNySkning = new JButton("Ny s\u00F6kning");
+		btnNySkning.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField_1.setText("");
+				textField_pnr.setText("");
+				lbl_andringssvar.setText("");
+				lbl_soksvar.setText("");
+			}
+		});
+		btnNySkning.setBounds(161, 278, 116, 23);
+		contentPane.add(btnNySkning);
 		
 	}
 }

@@ -46,16 +46,15 @@ public class Apptest {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnRegistreraKund = new JButton("Registera Kund");
-		btnRegistreraKund.setBounds(132, 50, 165, 23);
-		frame.getContentPane().add(btnRegistreraKund);
 		btnRegistreraKund.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				ReggaKund rg1 = new ReggaKund(controller);
 				rg1.setVisible(true);
 			}
 		});
+		btnRegistreraKund.setBounds(132, 50, 165, 23);
+		frame.getContentPane().add(btnRegistreraKund);
 	
-		
 		JButton btnHittaKund = new JButton("Hitta Kund");
 		btnHittaKund.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

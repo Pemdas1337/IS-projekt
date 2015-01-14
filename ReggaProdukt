@@ -1,8 +1,5 @@
 package allt;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -28,25 +25,13 @@ public class ReggaProdukt extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//ReggaProdukt frame = new ReggaProdukt();
-					//frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
+	
 	public ReggaProdukt(Controller controller) {
 		setTitle("Registrera produkt");
-		Controller kontroller = controller;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 460);
 		contentPane = new JPanel();
@@ -130,6 +115,15 @@ public class ReggaProdukt extends JFrame {
 		lblsvAr.setBounds(112, 368, 200, 20);
 		contentPane.add(lblsvAr);
 		
+		textField_antal = new JTextField();
+		textField_antal.setColumns(10);
+		textField_antal.setBounds(112, 342, 200, 20);
+		contentPane.add(textField_antal);
+		
+		JLabel lblAntal = new JLabel("Antal");
+		lblAntal.setBounds(10, 331, 121, 40);
+		contentPane.add(lblAntal);
+		
 		JButton btnAvbryt = new JButton("Avbryt");
 		btnAvbryt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -143,8 +137,8 @@ public class ReggaProdukt extends JFrame {
 		JButton btnRegistrera = new JButton("Registrera");
 		btnRegistrera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String Pnummer = textField_PNr.getText();
-				if(controller.database.findProdBoolean(Pnummer)){
+				String pNummer = textField_PNr.getText();
+				if(controller.findProdBoolean(pNummer)){
 					lblsvAr.setText("Product already registered!");
 					textField_Pnamn.setText("");
 					textField_PNr.setText("");
@@ -154,17 +148,18 @@ public class ReggaProdukt extends JFrame {
 					textField_Plagerplats.setText("");
 					textField_Pvikt.setText("");
 					textField_Pkilopris.setText("");
+					textField_antal.setText("");
 				} else {
-				String Pnamn = textField_Pnamn.getText();
-				String Pbatchkod = textField_Pbatchkod.getText();
-				String Plagerfilial = textField_Plagerfilial.getText();
-				String Pspecifikation = textField_Pspecifikation.getText();
-				String Plagerplats = textField_Plagerplats.getText();
-				String Pvikt = textField_Pvikt.getText();
-				String Pkilopris = textField_Pkilopris.getText();
-				String ettantal = textField_antal.getText();
-				int antal = Integer.parseInt(ettantal);
-				kontroller.addProduct(Pnamn, Pnummer, Pbatchkod, Plagerfilial, Pspecifikation, Plagerplats, Pvikt, Pkilopris, antal);
+				String pNamn = textField_Pnamn.getText();
+				String pBatchkod = textField_Pbatchkod.getText();
+				String pLagerfilial = textField_Plagerfilial.getText();
+				String pSpecifikation = textField_Pspecifikation.getText();
+				String pLagerplats = textField_Plagerplats.getText();
+				String pVikt = textField_Pvikt.getText();
+				String pPris = textField_Pkilopris.getText();
+				String antal = textField_antal.getText();
+				int pAntal = Integer.parseInt(antal);
+				controller.addProduct(pNamn, pNummer, pBatchkod, pLagerfilial, pSpecifikation, pLagerplats, pVikt, pPris, pAntal);
 				lblsvAr.setText("Produkt registrerad!");
 				}
 			}
@@ -183,21 +178,12 @@ public class ReggaProdukt extends JFrame {
 				textField_Plagerplats.setText("");
 				textField_Pvikt.setText("");
 				textField_Pkilopris.setText("");
+				textField_antal.setText("");
 				lblsvAr.setText("");
 			}
 		});
 		btnRensaFlt.setBounds(90, 388, 110, 23);
 		contentPane.add(btnRensaFlt);
-		
-		textField_antal = new JTextField();
-		textField_antal.setColumns(10);
-		textField_antal.setBounds(112, 342, 200, 20);
-		contentPane.add(textField_antal);
-		
-		JLabel lblAntal = new JLabel("Antal");
-		lblAntal.setBounds(10, 331, 121, 40);
-		contentPane.add(lblAntal);
-		
 		
 	}
 
